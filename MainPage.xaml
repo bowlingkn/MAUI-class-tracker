@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+    <NavigationPage.TitleView>
+        <Label Text="Home" FontSize="Medium" VerticalOptions="Center" TextColor="LightGrey"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddTerm" Text="Add Term" Clicked="AddTerm_Clicked"/>
+        <ToolbarItem x:Name="Settings" Text="Settings" Clicked="Settings_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <CollectionView x:Name="TermCV" ItemsSource="{Binding TermClass}" Margin="5"
+                        SelectionMode ="Single" SelectionChanged="TermCV_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Modify"
+                                       BackgroundColor="Green" 
+                                       Invoked="ModifyInvoked" />
+                            <SwipeItem Text="Delete"
+                                       BackgroundColor="red" 
+                                       Invoked="DeleteInvoked"/>
+                        </SwipeView.RightItems>
+                        <Frame Padding="10" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="5"
+                              RowDefinitions="Auto, Auto"
+                              ColumnDefinitions=".7*, .3*">
+
+                                <Label Grid.RowSpan="2" 
+                                   Text="{Binding Name}"
+                                   FontSize = "25"/>
+                                <Label Grid.Column="1"
+                                   Text="{Binding Start}"
+                                   FontSize="10"
+                                       HorizontalTextAlignment="End"/>
+                                <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding End.Date}"
+                                   FontSize="10"
+                                       HorizontalTextAlignment="End"/>
+
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

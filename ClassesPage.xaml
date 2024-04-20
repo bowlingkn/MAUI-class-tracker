@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ClassesPage">
+    
+    <NavigationPage.TitleView>
+        <Label x:Name="CurrentTerm" FontSize="Medium" VerticalOptions="Center" TextColor="LightGrey"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddClass" Text="Add Class" Clicked="AddClass_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <CollectionView x:Name="ClassCollectionView"
+                    Margin="5"
+                    ItemsSource="{Binding Classes}"
+                    EmptyView="No Classes to display."
+                    SelectionMode="Single"
+                    SelectionChanged="ClassCollectionView_SelectionChanged">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="2"/>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItem Text="Delete"
+                                   BackgroundColor="red" 
+                                   Invoked="DeleteInvoked"/>
+                    </SwipeView.RightItems>
+                    <Frame Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Frame.GestureRecognizers>
+                        <Grid Padding="5" RowSpacing="1" ColumnSpacing="22" 
+                              RowDefinitions="Auto, Auto" 
+                              ColumnDefinitions=".4*, .3*, .3*">
+                        
+                             <Label Text="{Binding Name}" Grid.ColumnSpan="2" FontSize="Large"/>
+                             <Label Grid.Column="2" Text="{Binding Start}"/>
+                             <Label Grid.Row="1" Grid.Column="2" Text="{Binding End}"/>
+                             <Label Grid.Row="1" Text="{Binding Status}"/>
+
+                        </Grid>
+                    </Frame>
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

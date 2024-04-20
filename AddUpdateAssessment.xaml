@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.AddUpdateAssessment"
+             Title="AddUpdateAssessment">
+    <VerticalStackLayout>
+        <Entry x:Name="AssessName" Placeholder="Assessment Title"/>
+
+        <Picker x:Name="TypePicker" Title="Select assessment type">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Performance Assessment</x:String>
+                    <x:String>Objective Assessment</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label Text="Start Date"/>
+        <DatePicker x:Name="StartDate" 
+                    MinimumDate="01/01/2020"
+                    MaximumDate="12/31/2030"/>
+        <Label Text="End Date"/>
+        <DatePicker x:Name="EndDate"
+                    MinimumDate="01/01/2020"
+                    MaximumDate="12/31/2030"/>
+        <Grid RowDefinitions="Auto" ColumnDefinitions=".8*, .2*">
+            
+            <Label Text="Notifications" VerticalTextAlignment="Center"/>
+            <Switch x:Name="Notify" Grid.Column="1"/>
+
+        </Grid>
+        
+        <Button x:Name="saveButton" Text="Save" Clicked="SaveButton_Clicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

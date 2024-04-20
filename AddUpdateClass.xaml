@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.AddUpdateClass"
+             Title="AddUpdateClass">
+ 
+    <ScrollView>
+        <StackLayout Padding="3">
+            <Entry x:Name="ClassName" Placeholder="Course Name"/>
+
+            <Picker x:Name="StatusPicker" Title="Select course status">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>In Progress</x:String>
+                        <x:String>Completed</x:String>
+                        <x:String>Not Started</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Start Date:"/>
+            <DatePicker x:Name="StartDate" MinimumDate="01/01/2020" MaximumDate="12/31/2030"/>
+            <Label Text="End Date:"/>
+            <DatePicker x:Name="EndDate" MinimumDate="01/01/2020" MaximumDate="12/31/2030"/>
+
+            <Grid RowDefinitions="Auto" ColumnDefinitions=".8*, .2*">
+
+                <Label Text="Notifications" VerticalTextAlignment="Center"/>
+                <Switch x:Name="Notify" Grid.Column="1"/>
+
+            </Grid>
+
+            <Label Text="Instructor:"/>
+            <Entry x:Name="TeacherName" Placeholder="Name"/>
+            <Entry x:Name="TeacherEmail" Placeholder="Email"/>
+            <Entry x:Name="TeacherPhone" Placeholder="Phone Number"/>
+
+            <Label Text="Notes:"/>
+            <Frame Padding="0" CornerRadius="0">
+                <Editor x:Name="NotesEditor" Placeholder="Enter notes here." HeightRequest="100"/>
+            </Frame>
+
+            <Button Text="Save" Clicked="SaveButton_Clicked"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

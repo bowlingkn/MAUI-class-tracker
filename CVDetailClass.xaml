@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.CVDetailClass"
+             Title="CVDetailClass">
+
+    <NavigationPage.TitleView>
+        <Label x:Name="ClassTitle" FontSize="Medium" VerticalOptions="Center" TextColor="LightGrey"/>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="EditClass" Text="Edit Class" Clicked="EditClass_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout>
+            <CollectionView x:Name="ClassCV" ItemsSource="{Binding Classes}" Margin="5" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Grid Padding="5"
+                                RowDefinitions="Auto, Auto, 15, Auto, Auto, Auto, 15, Auto, Auto, 15, Auto"
+                                 ColumnDefinitions=".4*, .3*, .3*">
+                                <Label x:Name="ClassName" Text="{Binding Name}" Grid.ColumnSpan="2"  FontSize="35"/>
+                                <Label x:Name="Status" Text="{Binding Status}" Grid.Row="1"/>
+                                <Label x:Name="StartDate" Text="{Binding Start}" Grid.Column="2" VerticalTextAlignment ="End" />
+                                <Label x:Name="EndDate" Text="{Binding End}" Grid.Row="1" Grid.Column="2" HorizontalOptions="End"/>
+
+                                <Label Text="Instructor:" Grid.Row="3"/>
+                                <Label x:Name="TeacherName" Text="{Binding TeacherName}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <Label x:Name="TeacherEmail" Text="{Binding TeacherEmail}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                <Label x:Name="TeacherPhone" Text="{Binding TeacherPhone}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+                                <Label Text="Notes:" Grid.Row="7"/>
+                                <Frame Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Padding="0" CornerRadius="0">
+                                    <Editor x:Name="NotesEditor" Text="{Binding Notes}" Placeholder="Enter notes here." IsReadOnly="True" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" HeightRequest="100"/>
+                                </Frame>
+
+                                <Label Text="Share Notes:" Grid.Row="8"/>
+                                <Button Text="Share" Margin="3" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Clicked="ShareButton_Clicked"/>
+
+                                <Label Text="Assessments:" Grid.Row="10" />
+                                <Button Text="Add Assessment"  Margin="3" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Clicked="BtnAddAssessment_Clicked"/>
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CollectionView x:Name="AssessmentsCV" ItemsSource="{Binding AssessmentsClass}" Margin="5"
+                                            SelectionMode ="Single" SelectionChanged="AssessmentsCV_SelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Modify"
+                                                BackgroundColor="Green" 
+                                                Invoked="ModifyInvoked" />
+                                <SwipeItem Text="Delete"
+                                                BackgroundColor="red" 
+                                                Invoked="DeleteInvoked"/>
+                            </SwipeView.RightItems>
+                            <Frame>
+                                <Frame.GestureRecognizers>
+                                    <!--   <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/> -->
+                                </Frame.GestureRecognizers>
+                                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions=".6*, .4*">
+                                    <Label x:Name="AssesssmentName" Text="{Binding Name}" FontSize = "10" FontAttributes="Bold"/>
+                                    <Label x:Name="AssessmentType" Text="{Binding Type}" Grid.Row="1" FontSize="10"/>
+                                    <Label x:Name="AssessmentStart" Grid.Column="1" Text="{Binding Start}" FontSize="10"/>
+                                    <Label x:Name="AssessmentEnd" Grid.Column="1" Grid.Row="1" Text="{Binding End}" FontSize="10"/>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
